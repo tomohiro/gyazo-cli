@@ -2,9 +2,10 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
+	"log"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -36,6 +37,15 @@ EXAMPLE:
 	app.Action = doMain
 	app.Run(os.Args)
 	os.Exit(exitCode)
+}
+
+// Image is reponse object of Gyazo upload API.
+type Image struct {
+	ID           string `json:image_id`
+	PermalinkURL string `json:permalink_url`
+	ThumbURL     string `json:thumb_url`
+	URL          string `json:url`
+	Type         string `json:type`
 }
 
 func doMain(c *cli.Context) {
@@ -78,11 +88,12 @@ func doMain(c *cli.Context) {
 		return
 	}
 
-	body, err := ioutil.ReadAll(res.Body)
-	if err != nil {
+	var image Image
+	if err = json.NewDecoder(res.Body).Decode(&image); err != nil {
+		log.Println(err)
 		exitCode = 1
 		return
 	}
 
-	println(string(body))
+	fmt.Println(image.URL)
 }
