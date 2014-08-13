@@ -25,7 +25,7 @@ func main() {
 	app := cli.NewApp()
 	app.Name = "gyazo"
 	app.Version = Version
-	app.Usage = `Gyazo CLI
+	app.Usage = `Gyazo command-line uploader
 
 EXAMPLE:
 
