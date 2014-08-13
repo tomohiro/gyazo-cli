@@ -13,34 +13,36 @@ import (
 )
 
 var (
-	// os.Exit forcely kills process.
-	// So let me share this global variable to terminate at the last.
+	// exitCode to terminate
 	exitCode = 0
 
 	// endpoint of the Gyazo upload API endpoint.
 	endpoint = "http://upload.gyazo.com/upload.cgi"
 )
 
-func main() {
-	app := cli.NewApp()
-	app.Name = "gyazo"
-	app.Version = Version
-	app.Usage = `Gyazo command-line uploader
+const usageText = `Gyazo command-line uploader
 
 EXAMPLE:
 
   $ gyazo foo.png
   $ gyazo ~/Downloads/bar.jpg`
+
+func main() {
+	app := cli.NewApp()
+	app.Name = "gyazo"
+	app.Version = Version
+	app.Usage = usageText
 	app.Author = "Tomohiro TAIRA"
 	app.Email = "tomohiro.t@gmail.com"
-	app.Action = doMain
+	app.Action = upload
 	app.Run(os.Args)
+
 	os.Exit(exitCode)
 }
 
-func doMain(c *cli.Context) {
+func upload(c *cli.Context) {
 	if len(c.Args()) == 0 {
-		fmt.Println("gyazo: try `gyazo --help` for more information")
+		fmt.Fprintln(os.Stderr, "Try `gyazo --help` for more information")
 		exitCode = 1
 		return
 	}
@@ -48,14 +50,13 @@ func doMain(c *cli.Context) {
 	filename := c.Args().First()
 	content, err := os.Open(filename)
 	if err != nil {
-		os.Stderr.WriteString("failed to open and read " + filename)
-		exitCode = 1
+		fmt.Fprintf(os.Stderr, "Failed to open and read %s\n", filename)
 		return
 	}
 
 	// Create multipart/form-data
-	var b bytes.Buffer
-	w := multipart.NewWriter(&b)
+	var buf bytes.Buffer
+	w := multipart.NewWriter(&buf)
 
 	f, err := w.CreateFormFile("imagedata", filename)
 	if err != nil {
@@ -70,19 +71,20 @@ func doMain(c *cli.Context) {
 
 	w.Close()
 
-	res, err := http.Post(endpoint, w.FormDataContentType(), &b)
+	res, err := http.Post(endpoint, w.FormDataContentType(), &buf)
 	defer res.Body.Close()
 	if err != nil {
-		os.Stderr.WriteString("failed to upload")
+		fmt.Fprintf(os.Stderr, "Failed to upload: %s", err)
 		exitCode = 1
 		return
 	}
 
-	body, err := ioutil.ReadAll(res.Body)
+	url, err := ioutil.ReadAll(res.Body)
 	if err != nil {
+		fmt.Fprintf(os.Stderr, "Response error: %s", err)
 		exitCode = 1
 		return
 	}
 
-	println(string(body))
+	fmt.Println(url)
 }
