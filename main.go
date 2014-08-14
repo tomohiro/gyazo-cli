@@ -16,7 +16,7 @@ var (
 	// exitCode to terminate
 	exitCode = 0
 
-	// endpoint of the Gyazo upload API endpoint.
+	// endpoint of the Gyazo upload API.
 	endpoint = "http://upload.gyazo.com/upload.cgi"
 )
 
@@ -27,7 +27,7 @@ EXAMPLE:
   $ gyazo foo.png
   $ gyazo ~/Downloads/bar.jpg`
 
-// Set the endpoint of Gyazo upload API endpoint
+// Set the endpoint of Gyazo upload API.
 func init() {
 	if os.Getenv("GYAZO_SERVER_URL") != "" {
 		endpoint = os.Getenv("GYAZO_SERVER_URL")
