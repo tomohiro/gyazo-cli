@@ -27,6 +27,13 @@ EXAMPLE:
   $ gyazo foo.png
   $ gyazo ~/Downloads/bar.jpg`
 
+// Set the endpoint of Gyazo upload API endpoint
+func init() {
+	if os.Getenv("GYAZO_SERVER_URL") != "" {
+		endpoint = os.Getenv("GYAZO_SERVER_URL")
+	}
+}
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "gyazo"
