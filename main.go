@@ -86,5 +86,5 @@ func upload(c *cli.Context) {
 		return
 	}
 
-	fmt.Println(url)
+	fmt.Println(string(url))
 }
