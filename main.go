@@ -14,10 +14,10 @@ import (
 )
 
 var (
-	// exitCode to terminate
+	// exitCode to terminate.
 	exitCode = 0
 
-	// Default endpoint of the Gyazo upload API.
+	// Default endpoint.
 	endpoint = "http://upload.gyazo.com/upload.cgi"
 )
 
@@ -41,7 +41,7 @@ func main() {
 	os.Exit(exitCode)
 }
 
-// Set the endpoint of Gyazo upload API.
+// Set the endpoint of Gyazo API.
 func init() {
 	if os.Getenv("GYAZO_SERVER_URL") != "" {
 		endpoint = os.Getenv("GYAZO_SERVER_URL")
@@ -50,7 +50,9 @@ func init() {
 	}
 }
 
-// Image is response object of Gyazo upload API.
+// Image represents a uploaded image on the Gyazo server.
+//
+// Gyazo API docs: https://gyazo.com/api/docs/image
 type Image struct {
 	ID           string `json:"image_id"`
 	PermalinkURL string `json:"permalink_url"`
@@ -59,7 +61,9 @@ type Image struct {
 	Type         string `json:"type"`
 }
 
-// Upload image to Gyazo server.
+// Upload a new image to a Gyazo server from the specified local image file.
+//
+// Gyazo API docs: https://gyazo.com/api/docs/image
 func upload(c *cli.Context) {
 	if len(c.Args()) == 0 {
 		fmt.Fprintln(os.Stderr, "Try `gyazo --help` for more information")
