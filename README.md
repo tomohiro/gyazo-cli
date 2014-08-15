@@ -13,6 +13,15 @@ http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
 ```
 
 
+### Use Gyazo API client token
+
+Set the access token to environment variable like this:
+
+```sh
+export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
+```
+
+
 Installation
 --------------------------------------------------------------------------------
 
