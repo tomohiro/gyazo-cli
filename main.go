@@ -29,6 +29,8 @@ EXAMPLE:
   $ gyazo ~/Downloads/bar.jpg`
 
 func main() {
+	defer os.Exit(exitCode)
+
 	app := cli.NewApp()
 	app.Name = "gyazo"
 	app.Version = Version
@@ -37,8 +39,6 @@ func main() {
 	app.Email = "tomohiro.t@gmail.com"
 	app.Action = upload
 	app.Run(os.Args)
-
-	os.Exit(exitCode)
 }
 
 // Set the endpoint of Gyazo API.
