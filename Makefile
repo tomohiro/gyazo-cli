@@ -8,7 +8,8 @@ test: deps
 
 install:
 	@echo "===> Installing command..."
-	go install
+	go build -o gyazo
+	mv gyazo $(GOPATH)/bin/
 
 deps:
 	@echo "===> Installing dependencies..."
@@ -20,7 +21,7 @@ updatedeps:
 
 build: deps
 	@echo "===> Beginning compile..."
-	gox -os "darwin linux windows" -output "pkg/{{.OS}}_{{.Arch}}/{{.Dir}}"
+	gox -os "darwin linux windows" -output "pkg/{{.OS}}_{{.Arch}}/gyazo"
 
 clean:
 	go clean
