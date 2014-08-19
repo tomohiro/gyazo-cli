@@ -35,7 +35,9 @@ Go to the [release page](https://github.com/Tomohiro/gyazo-cli/releases) and dow
 Install to `$GOPATH/bin`:
 
 ```sh
-$ go get github.com/Tomohiro/gyazo
+$ go get -d github.com/Tomohiro/gyazo-cli
+$ cd $GOPATH/src/github.com/Tomohiro/gyazo-cli
+$ make install
 ```
 
 
