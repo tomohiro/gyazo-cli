@@ -27,7 +27,7 @@ Installation
 
 ### Get the stable binary
 
-Go to the [release page](/releases) and download a zip file.
+Go to the [release page](https://github.com/Tomohiro/gyazo-cli/releases) and download a zip file.
 
 
 ### go get
