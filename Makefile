@@ -62,11 +62,11 @@ dist: build
 		pushd $(DISTDIR); \
 		shasum -a 256 * > ./$(VERSION)_SHA256SUMS; \
 		popd; \
-	don	e
+	done
 
 release:
 	@echo "===> Releasing to GitHub..."
-	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
+	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)"
 
 clean:
 	go clean
