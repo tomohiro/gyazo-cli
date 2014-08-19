@@ -66,7 +66,7 @@ dist: build
 
 release:
 	@echo "===> Releasing to GitHub..."
-	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)"
+	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
 
 clean:
 	go clean
