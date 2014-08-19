@@ -1,8 +1,10 @@
 .PHONY: clean
 
 # Project information
-TOP       = $(shell pwd)
-VERSION   = $(shell grep "const Version " $(TOP)/version.go | sed -E 's/.*"(.+)"$$/\1/')
+OWNER      = $(shell whoami)
+TOP        = $(shell pwd)
+REPOSITORY = $(shell basename $(TOP))
+VERSION    = $(shell grep "const Version " $(TOP)/version.go | sed -E 's/.*"(.+)"$$/\1/')
 
 # Build information
 OUTPUT    = gyazo
@@ -61,6 +63,10 @@ dist: build
 		shasum -a 256 * > ./$(VERSION)_SHA256SUMS; \
 		popd; \
 	don	e
+
+release:
+	@echo "===> Releasing to GitHub..."
+	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
 
 clean:
 	go clean
