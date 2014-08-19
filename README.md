@@ -25,6 +25,15 @@ export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
 Installation
 --------------------------------------------------------------------------------
 
+### Get the stable binary
+
+Go to the [release page](/releases) and download a zip file.
+
+
+### go get
+
+Install to `$GOPATH/bin`:
+
 ```sh
 $ go get github.com/Tomohiro/gyazo
 ```
