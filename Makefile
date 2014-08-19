@@ -23,6 +23,7 @@ help:
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
 	@echo "  build        Build $(OUTPUT) in to the pkg directory"
+	@echo "  dist         Ship packages to release"
 	@echo "  release      Create tag ($(VERSION)) and upload binaries to GitHub"
 	@echo "  clean        Cleanup artifacts"
 	@echo "  help         Show this help messages"
