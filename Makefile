@@ -1,4 +1,4 @@
-.PHONY: clean
+.PHONY: help test setup deps updatedeps clean
 
 # Project information
 OWNER      = $(shell whoami)
@@ -15,7 +15,17 @@ XC_ARCH   = "386 amd64 arm"
 DISTDIR   = $(BUILDDIR)/dist/$(VERSION)
 
 
-default: test
+help:
+	@echo "Please type: make [target]"
+	@echo "  test         Run tests"
+	@echo "  setup        Setup development environment"
+	@echo "  install      Build $(OUTPUT) and install to $$GOPATH/bin"
+	@echo "  deps         Install runtime dependencies"
+	@echo "  updatedeps   Update runtime dependencies"
+	@echo "  build        Build $(OUTPUT) in to the pkg directory"
+	@echo "  release      Create tag ($(VERSION)) and upload binaries to GitHub"
+	@echo "  clean        Cleanup artifacts"
+	@echo "  help         Show this help messages"
 
 test: deps
 	@echo "===> Running tests..."
@@ -31,7 +41,7 @@ setup:
 	# ghr - Easy to ship your project on GitHub to your user
 	go get github.com/tcnksm/ghr
 
-install:
+install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
 	go build -o $(OUTPUT)
 	mv $(OUTPUT) $(GOPATH)/bin/
@@ -65,7 +75,7 @@ dist: build
 	done
 
 release:
-	@echo "===> Releasing to GitHub..."
+	@echo "===> Publishing to GitHub..."
 	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
 
 clean:
