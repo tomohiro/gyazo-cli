@@ -1,4 +1,4 @@
-.PHONY: help test setup deps updatedeps clean
+.PHONY: help test setup deps updatedeps clean release
 
 # Project information
 OWNER      = $(shell whoami)
