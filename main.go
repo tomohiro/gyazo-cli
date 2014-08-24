@@ -13,6 +13,7 @@ import (
 
 	"github.com/codegangsta/cli"
 	"github.com/mitchellh/go-homedir"
+	"github.com/skratchdot/open-golang/open"
 )
 
 var (
@@ -125,6 +126,10 @@ func upload(c *cli.Context) {
 	}
 
 	fmt.Println(url)
+	err = open.Run(url)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to open by default browser: %s\n", err)
+	}
 }
 
 // imageURL returns url of uploaded image.
