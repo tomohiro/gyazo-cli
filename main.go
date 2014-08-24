@@ -24,20 +24,13 @@ var (
 	endpoint = "http://upload.gyazo.com/upload.cgi"
 )
 
-const usageText = `Gyazo command-line uploader
-
-		EXAMPLE:
-
-		$ gyazo foo.png
-		$ gyazo ~/Downloads/bar.jpg`
-
 func main() {
 	defer os.Exit(exitCode)
 
 	app := cli.NewApp()
 	app.Name = "gyazo"
 	app.Version = Version
-	app.Usage = usageText
+	app.Usage = "Gyazo command-line uploader"
 	app.Author = "Tomohiro TAIRA"
 	app.Email = "tomohiro.t@gmail.com"
 	app.Action = upload
