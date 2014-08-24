@@ -137,8 +137,8 @@ func imageURL(r *http.Response) (string, error) {
 		url = image.PermalinkURL
 	} else {
 		id := r.Header.Get("X-Gyazo-Id")
-		if err := saveGyazoID(id); err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to save Gyazo ID: %s\n", err)
+		if err := storeGyazoID(id); err != nil {
+			fmt.Fprintf(os.Stderr, "Failed to store Gyazo ID: %s\n", err)
 		}
 
 		body, err := ioutil.ReadAll(r.Body)
@@ -152,7 +152,7 @@ func imageURL(r *http.Response) (string, error) {
 	return url, nil
 }
 
-// getID returns ID
+// gyazoID returns Gyazo ID from stored file.
 func gyazoID() string {
 	var id = ""
 	body, err := ioutil.ReadFile(gyazoIDPath())
@@ -164,8 +164,8 @@ func gyazoID() string {
 	return id
 }
 
-// saveGyazoID stores Gyazo ID to file.
-func saveGyazoID(id string) error {
+// storeGyazoID stores Gyazo ID to file.
+func storeGyazoID(id string) error {
 	var err error
 	buf := bytes.NewBufferString(id)
 	err = ioutil.WriteFile(gyazoIDPath(), buf.Bytes(), 0644)
