@@ -155,14 +155,7 @@ func imageURL(r *http.Response) (string, error) {
 // getID returns ID
 func gyazoID() string {
 	var id = ""
-
-	fp, err := os.Open(gyazoIDPath())
-	if err != nil {
-		return id
-	}
-	defer fp.Close()
-
-	body, err := ioutil.ReadAll(fp)
+	body, err := ioutil.ReadFile(gyazoIDPath())
 	if err != nil {
 		return id
 	}
