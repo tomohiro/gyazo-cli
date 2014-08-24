@@ -9,8 +9,10 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"runtime"
 
 	"github.com/codegangsta/cli"
+	"github.com/mitchellh/go-homedir"
 )
 
 var (
@@ -23,10 +25,10 @@ var (
 
 const usageText = `Gyazo command-line uploader
 
-EXAMPLE:
+		EXAMPLE:
 
-  $ gyazo foo.png
-  $ gyazo ~/Downloads/bar.jpg`
+		$ gyazo foo.png
+		$ gyazo ~/Downloads/bar.jpg`
 
 func main() {
 	defer os.Exit(exitCode)
@@ -96,6 +98,8 @@ func upload(c *cli.Context) {
 
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		writer.WriteField("access_token", os.Getenv("GYAZO_ACCESS_TOKEN"))
+	} else {
+		writer.WriteField("id", gyazoID())
 	}
 
 	err = writer.Close()
@@ -113,23 +117,80 @@ func upload(c *cli.Context) {
 	}
 	defer res.Body.Close()
 
+	url, err := imageURL(res)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
+		exitCode = 1
+		return
+	}
+
+	fmt.Println(url)
+}
+
+// imageURL returns url of uploaded image.
+func imageURL(r *http.Response) (string, error) {
+	var url string
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		image := Image{}
-		if err = json.NewDecoder(res.Body).Decode(&image); err != nil {
-			fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
-			exitCode = 1
-			return
+		if err := json.NewDecoder(r.Body).Decode(&image); err != nil {
+			return "", err
 		}
 
-		fmt.Println(image.PermalinkURL)
+		url = image.PermalinkURL
 	} else {
-		url, err := ioutil.ReadAll(res.Body)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
-			exitCode = 1
-			return
+		id := r.Header.Get("X-Gyazo-Id")
+		if err := saveGyazoID(id); err != nil {
+			fmt.Fprintf(os.Stderr, "Failed to save Gyazo ID: %s\n", err)
 		}
 
-		fmt.Println(string(url))
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			return "", err
+		}
+
+		url = string(body)
 	}
+
+	return url, nil
+}
+
+// getID returns ID
+func gyazoID() string {
+	id := ""
+
+	fp, err := os.Open(gyazoIDPath())
+	if err != nil {
+		return id
+	}
+	defer fp.Close()
+
+	body, err := ioutil.ReadAll(fp)
+	if err != nil {
+		return id
+	}
+
+	id = string(body)
+	return id
+}
+
+// saveGyazoID stores Gyazo ID to file.
+func saveGyazoID(id string) error {
+	return nil
+}
+
+// gyazoIDPath returns path of Gyazo ID file on local filesystem.
+func gyazoIDPath() string {
+	homedir, _ := homedir.Dir()
+
+	var path string
+	switch runtime.GOOS {
+	case "darwin":
+		path = fmt.Sprintf("%s/Library/Gyazo/id", homedir)
+	case "linux":
+		path = fmt.Sprintf("%s/.gyazo.id", homedir)
+	case "windows":
+		path = ""
+	}
+
+	return path
 }
