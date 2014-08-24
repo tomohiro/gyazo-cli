@@ -129,11 +129,11 @@ func upload(c *cli.Context) {
 
 // imageURL returns url of uploaded image.
 func imageURL(r *http.Response) (string, error) {
-	var url string
+	var url = ""
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		image := Image{}
 		if err := json.NewDecoder(r.Body).Decode(&image); err != nil {
-			return "", err
+			return url, err
 		}
 
 		url = image.PermalinkURL
@@ -145,7 +145,7 @@ func imageURL(r *http.Response) (string, error) {
 
 		body, err := ioutil.ReadAll(r.Body)
 		if err != nil {
-			return "", err
+			return url, err
 		}
 
 		url = string(body)
@@ -156,7 +156,7 @@ func imageURL(r *http.Response) (string, error) {
 
 // getID returns ID
 func gyazoID() string {
-	id := ""
+	var id = ""
 
 	fp, err := os.Open(gyazoIDPath())
 	if err != nil {
@@ -182,14 +182,12 @@ func saveGyazoID(id string) error {
 func gyazoIDPath() string {
 	homedir, _ := homedir.Dir()
 
-	var path string
+	var path = ""
 	switch runtime.GOOS {
 	case "darwin":
 		path = fmt.Sprintf("%s/Library/Gyazo/id", homedir)
 	case "linux":
 		path = fmt.Sprintf("%s/.gyazo.id", homedir)
-	case "windows":
-		path = ""
 	}
 
 	return path
