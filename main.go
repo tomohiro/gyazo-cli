@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -179,7 +178,6 @@ func storeGyazoID(id string) error {
 	dir := filepath.Dir(path)
 	_, err = os.Stat(dir)
 	if os.IsNotExist(err) {
-		log.Println("Created dir: " + dir)
 		err = os.Mkdir(dir, 0755)
 		if err != nil {
 			return err
@@ -189,7 +187,6 @@ func storeGyazoID(id string) error {
 	_, err = os.Stat(path)
 	if os.IsExist(err) {
 		newpath := fmt.Sprintf("%s_%s.bak", id, time.Now().Format("20060102150406"))
-		log.Println("Rename id: " + newpath)
 		err = os.Rename(path, newpath)
 		if err != nil {
 			return err
