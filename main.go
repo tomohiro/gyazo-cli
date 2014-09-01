@@ -9,8 +9,13 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"path/filepath"
+	"runtime"
+	"time"
 
 	"github.com/codegangsta/cli"
+	"github.com/mitchellh/go-homedir"
+	"github.com/skratchdot/open-golang/open"
 )
 
 var (
@@ -21,20 +26,13 @@ var (
 	endpoint = "http://upload.gyazo.com/upload.cgi"
 )
 
-const usageText = `Gyazo command-line uploader
-
-EXAMPLE:
-
-  $ gyazo foo.png
-  $ gyazo ~/Downloads/bar.jpg`
-
 func main() {
 	defer os.Exit(exitCode)
 
 	app := cli.NewApp()
 	app.Name = "gyazo"
 	app.Version = Version
-	app.Usage = usageText
+	app.Usage = "Gyazo command-line uploader"
 	app.Author = "Tomohiro TAIRA"
 	app.Email = "tomohiro.t@gmail.com"
 	app.Action = upload
@@ -96,6 +94,8 @@ func upload(c *cli.Context) {
 
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		writer.WriteField("access_token", os.Getenv("GYAZO_ACCESS_TOKEN"))
+	} else {
+		writer.WriteField("id", gyazoID())
 	}
 
 	err = writer.Close()
@@ -113,23 +113,108 @@ func upload(c *cli.Context) {
 	}
 	defer res.Body.Close()
 
+	url, err := imageURL(res)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
+		exitCode = 1
+		return
+	}
+
+	fmt.Println(url)
+	err = open.Run(url)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Failed to open by default browser: %s\n", err)
+	}
+}
+
+// imageURL returns url of uploaded image.
+func imageURL(r *http.Response) (string, error) {
+	var url = ""
+	var err error
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		image := Image{}
-		if err = json.NewDecoder(res.Body).Decode(&image); err != nil {
-			fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
-			exitCode = 1
-			return
+		if err = json.NewDecoder(r.Body).Decode(&image); err != nil {
+			return url, err
 		}
 
-		fmt.Println(image.PermalinkURL)
+		url = image.PermalinkURL
 	} else {
-		url, err := ioutil.ReadAll(res.Body)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
-			exitCode = 1
-			return
+		id := r.Header.Get("X-Gyazo-Id")
+		if err = storeGyazoID(id); err != nil {
+			fmt.Fprintf(os.Stderr, "Failed to store Gyazo ID: %s\n", err)
 		}
 
-		fmt.Println(string(url))
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			return url, err
+		}
+
+		url = string(body)
 	}
+
+	return url, err
+}
+
+// gyazoID returns Gyazo ID from stored file.
+func gyazoID() string {
+	var id = ""
+	body, err := ioutil.ReadFile(gyazoIDPath())
+	if err != nil {
+		return id
+	}
+
+	id = string(body)
+	return id
+}
+
+// storeGyazoID stores Gyazo ID to file.
+func storeGyazoID(id string) error {
+	var err error
+	if id == "" {
+		return err
+	}
+
+	path := gyazoIDPath()
+
+	dir := filepath.Dir(path)
+	_, err = os.Stat(dir)
+	if os.IsNotExist(err) {
+		err = os.Mkdir(dir, 0755)
+		if err != nil {
+			return err
+		}
+	}
+
+	_, err = os.Stat(path)
+	if os.IsExist(err) {
+		newpath := fmt.Sprintf("%s_%s.bak", id, time.Now().Format("20060102150406"))
+		err = os.Rename(path, newpath)
+		if err != nil {
+			return err
+		}
+	}
+
+	buf := bytes.NewBufferString(id)
+	err = ioutil.WriteFile(path, buf.Bytes(), 0644)
+	if err != nil {
+		return err
+	}
+	return err
+}
+
+// gyazoIDPath returns path of Gyazo ID file on local filesystem.
+func gyazoIDPath() string {
+	homedir, _ := homedir.Dir()
+
+	var path = ""
+	switch runtime.GOOS {
+	case "darwin":
+		path = fmt.Sprintf("%s/Library/Gyazo/id", homedir)
+	case "linux":
+		path = fmt.Sprintf("%s/.gyazo.id", homedir)
+	case "windows":
+		path = fmt.Sprintf("%s\\Gyazo\\id.txt", os.Getenv("APPDATA"))
+	}
+
+	return path
 }
