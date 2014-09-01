@@ -167,6 +167,10 @@ func gyazoID() string {
 // storeGyazoID stores Gyazo ID to file.
 func storeGyazoID(id string) error {
 	var err error
+	if id == "" {
+		return err
+	}
+
 	buf := bytes.NewBufferString(id)
 	err = ioutil.WriteFile(gyazoIDPath(), buf.Bytes(), 0644)
 	if err != nil {
