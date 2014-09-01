@@ -185,6 +185,8 @@ func gyazoIDPath() string {
 		path = fmt.Sprintf("%s/Library/Gyazo/id", homedir)
 	case "linux":
 		path = fmt.Sprintf("%s/.gyazo.id", homedir)
+	case "windows":
+		path = fmt.Sprintf("%s\\Gyazo\\id.txt", os.Getenv("APPDATA"))
 	}
 
 	return path
