@@ -130,16 +130,17 @@ func upload(c *cli.Context) {
 // imageURL returns url of uploaded image.
 func imageURL(r *http.Response) (string, error) {
 	var url = ""
+	var err error
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		image := Image{}
-		if err := json.NewDecoder(r.Body).Decode(&image); err != nil {
+		if err = json.NewDecoder(r.Body).Decode(&image); err != nil {
 			return url, err
 		}
 
 		url = image.PermalinkURL
 	} else {
 		id := r.Header.Get("X-Gyazo-Id")
-		if err := storeGyazoID(id); err != nil {
+		if err = storeGyazoID(id); err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to store Gyazo ID: %s\n", err)
 		}
 
@@ -151,7 +152,7 @@ func imageURL(r *http.Response) (string, error) {
 		url = string(body)
 	}
 
-	return url, nil
+	return url, err
 }
 
 // gyazoID returns Gyazo ID from stored file.
