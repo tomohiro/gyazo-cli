@@ -8,7 +8,7 @@ Usage
 --------------------------------------------------------------------------------
 
 ```sh
-$ gyazo ./image.png
+$ gyazo ~/Desktop/image.png
 http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
 ```
 
