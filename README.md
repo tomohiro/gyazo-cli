@@ -38,7 +38,7 @@ export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
 
 ### Use self-hosted Gyazo server
 
-Set the access token to environment variable like this:
+Set the server URL to environment variable like this:
 
 ```sh
 export GYAZO_SERVER_URL="http://my-gyazo.example.com"
