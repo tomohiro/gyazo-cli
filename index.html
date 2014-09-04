@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Gyazo-cli by Tomohiro</title>
+    <title>Gyazo CLI by Tomohiro</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Gyazo-cli</h1>
+        <h1>Gyazo CLI</h1>
         <p>Gyazo command-line uploader</p>
 
         <p class="view"><a href="https://github.com/Tomohiro/gyazo-cli">View the Project on GitHub <small>Tomohiro/gyazo-cli</small></a></p>
@@ -36,9 +36,23 @@
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<div class="highlight highlight-sh"><pre><span class="nv">$ </span>gyazo ./image.png
+<h3>
+<a name="take-a-screenshot-and-then-upload" class="anchor" href="#take-a-screenshot-and-then-upload"><span class="octicon octicon-link"></span></a>Take a screenshot and then upload</h3>
+
+<p>NOTE: this feature is available on OS X only.</p>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>gyazo
+</pre></div>
+
+<h3>
+<a name="upload-specify-image" class="anchor" href="#upload-specify-image"><span class="octicon octicon-link"></span></a>Upload specify image</h3>
+
+<div class="highlight highlight-sh"><pre><span class="nv">$ </span>gyazo ~/Desktop/image.png
 http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
 </pre></div>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
 
 <h3>
 <a name="use-gyazo-api-client-token" class="anchor" href="#use-gyazo-api-client-token"><span class="octicon octicon-link"></span></a>Use Gyazo API client token</h3>
@@ -46,6 +60,14 @@ http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
 <p>Set the access token to environment variable like this:</p>
 
 <div class="highlight highlight-sh"><pre><span class="nb">export </span><span class="nv">GYAZO_ACCESS_TOKEN</span><span class="o">=</span><span class="s2">"YOUR GYAZO API ACCESS TOKEN"</span>
+</pre></div>
+
+<h3>
+<a name="use-self-hosted-gyazo-server" class="anchor" href="#use-self-hosted-gyazo-server"><span class="octicon octicon-link"></span></a>Use self-hosted Gyazo server</h3>
+
+<p>Set the server URL to environment variable like this:</p>
+
+<div class="highlight highlight-sh"><pre><span class="nb">export </span><span class="nv">GYAZO_SERVER_URL</span><span class="o">=</span><span class="s2">"http://my-gyazo.example.com"</span>
 </pre></div>
 
 <h2>
