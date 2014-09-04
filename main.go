@@ -3,12 +3,14 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
 	"net/http"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"time"
@@ -63,16 +65,23 @@ type Image struct {
 //
 // Gyazo API docs: https://gyazo.com/api/docs/image
 func upload(c *cli.Context) {
-	if len(c.Args()) == 0 {
-		fmt.Fprintln(os.Stderr, "Try `gyazo --help` for more information")
-		exitCode = 1
-		return
+	var filename string
+	var err error
+
+	filename = c.Args().First()
+
+	if filename == "" {
+		filename, err = takeScreenshot()
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Failed to take a screenshot: %s\n", err)
+			exitCode = 1
+		}
 	}
 
-	filename := c.Args().First()
+	// Open and load the content from an image.
 	content, err := os.Open(filename)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to open and read %s\n", filename)
+		fmt.Fprintf(os.Stderr, "Failed to open and read: %s\n", filename)
 		return
 	}
 	defer content.Close()
@@ -127,9 +136,25 @@ func upload(c *cli.Context) {
 	}
 }
 
+// takeScreenshot takes a screenshot and then returns it file path.
+func takeScreenshot() (string, error) {
+	var err error
+	path := fmt.Sprintf("/tmp/image_upload%d.png", os.Getpid())
+
+	switch runtime.GOOS {
+	case "darwin":
+		err = exec.Command("screencapture", "-i", path).Run()
+	case "linux":
+	case "windows":
+		err = errors.New("unsupported os")
+	}
+
+	return path, err
+}
+
 // imageURL returns url of uploaded image.
 func imageURL(r *http.Response) (string, error) {
-	var url = ""
+	var url string
 	var err error
 	if os.Getenv("GYAZO_ACCESS_TOKEN") != "" {
 		image := Image{}
@@ -157,7 +182,7 @@ func imageURL(r *http.Response) (string, error) {
 
 // gyazoID returns Gyazo ID from stored file.
 func gyazoID() string {
-	var id = ""
+	var id string
 	body, err := ioutil.ReadFile(gyazoIDPath())
 	if err != nil {
 		return id
@@ -206,7 +231,7 @@ func storeGyazoID(id string) error {
 func gyazoIDPath() string {
 	homedir, _ := homedir.Dir()
 
-	var path = ""
+	var path string
 	switch runtime.GOOS {
 	case "darwin":
 		path = fmt.Sprintf("%s/Library/Gyazo/id", homedir)
