@@ -8,7 +8,6 @@ VERSION    = $(shell grep "const Version " $(TOP)/version.go | sed -E 's/.*"(.+)
 
 # Build information
 OUTPUT    = gyazo
-BUILDTOOL = gox
 BUILDDIR  = $(TOP)/pkg
 XC_OS     = "darwin linux windows"
 XC_ARCH   = "386 amd64"
