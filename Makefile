@@ -71,7 +71,7 @@ dist: build
 		archive=$(OUTPUT)_$(VERSION)_$$platform; \
 		zip -j $(DISTDIR)/$$archive.zip $$dir/*; \
 		pushd $(DISTDIR); \
-		shasum -a 256 * > ./$(VERSION)_SHA256SUMS; \
+		shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
 		popd; \
 	done
 
