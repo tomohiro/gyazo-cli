@@ -1,0 +1,19 @@
+{
+	"ImportPath": "github.com/Tomohiro/gyazo-cli",
+	"GoVersion": "go1.3.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/codegangsta/cli",
+			"Comment": "1.2.0-22-g687db20",
+			"Rev": "687db20fc379d1686465a28e9959707cd1acc990"
+		},
+		{
+			"ImportPath": "github.com/mitchellh/go-homedir",
+			"Rev": "0af1630672c20c57b4f10c2afba2264516562918"
+		},
+		{
+			"ImportPath": "github.com/skratchdot/open-golang/open",
+			"Rev": "a09a2535ca5758662dfb0577fee1644826d8a850"
+		}
+	]
+}

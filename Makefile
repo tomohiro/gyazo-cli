@@ -35,6 +35,9 @@ test: deps
 setup:
 	@echo "===> Setup development tools..."
 
+	# Godep - Management tool for Go dependencies.
+	go get github.com/tools/godep
+
 	# Gox - Simple Go Cross Compilation
 	go get github.com/mitchellh/gox
 	gox -build-toolchain
