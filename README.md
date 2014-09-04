@@ -16,7 +16,7 @@ $ gyazo
 ```
 
 
-### Upload specify image
+### Uploading a specific image
 
 ```sh
 $ gyazo ~/Desktop/image.png
