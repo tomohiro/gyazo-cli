@@ -7,11 +7,13 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"mime"
 	"mime/multipart"
 	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"time"
 
@@ -75,7 +77,14 @@ func upload(c *cli.Context) {
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to take a screenshot: %s\n", err)
 			exitCode = 1
+			return
 		}
+	}
+
+	if !supportedMimetype(filename) {
+		fmt.Fprint(os.Stderr, "Failed to upload: unsupported file type\n")
+		exitCode = 1
+		return
 	}
 
 	// Open and load the content from an image.
@@ -150,6 +159,13 @@ func takeScreenshot() (string, error) {
 	}
 
 	return path, err
+}
+
+// supportedMimetype returns result of checked mimetype.
+func supportedMimetype(f string) bool {
+	t := mime.TypeByExtension(filepath.Ext(f))
+	res, _ := regexp.MatchString("image", t)
+	return res
 }
 
 // imageURL returns url of uploaded image.
