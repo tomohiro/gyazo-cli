@@ -219,7 +219,7 @@ func storeGyazoID(id string) error {
 
 	dir := filepath.Dir(path)
 	_, err = os.Stat(dir)
-	if os.IsNotExist(err) {
+	if err != nil {
 		err = os.Mkdir(dir, 0755)
 		if err != nil {
 			return err
@@ -227,7 +227,7 @@ func storeGyazoID(id string) error {
 	}
 
 	_, err = os.Stat(path)
-	if os.IsExist(err) {
+	if err == nil {
 		newpath := fmt.Sprintf("%s_%s.bak", id, time.Now().Format("20060102150406"))
 		err = os.Rename(path, newpath)
 		if err != nil {
