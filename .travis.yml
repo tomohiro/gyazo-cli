@@ -8,4 +8,4 @@ before_script:
   - make setup
   - make deps
 script:
-  - make dist
+  - make build
