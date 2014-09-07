@@ -1,6 +1,8 @@
 Gyazo CLI
 ================================================================================
 
+[![Build Status](https://travis-ci.org/Tomohiro/gyazo-cli.svg?branch=master)](https://travis-ci.org/Tomohiro/gyazo-cli)
+
 Gyazo command-line uploader
 
 
