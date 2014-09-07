@@ -1,5 +1,3 @@
-.PHONY: help test setup deps updatedeps clean release
-
 # Project information
 OWNER      = $(shell whoami)
 TOP        = $(shell pwd)
@@ -84,3 +82,5 @@ release:
 clean:
 	go clean
 	rm -rf $(BUILDDIR)
+
+.PHONY: help test setup deps updatedeps clean release
