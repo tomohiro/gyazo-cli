@@ -4,6 +4,7 @@ go:
   - 1.3
 
 script:
+  - export GOPATH="$PATH:$GOPATH/bin"
   - make setup
   - make deps
   - make dist

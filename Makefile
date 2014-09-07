@@ -10,7 +10,6 @@ BUILDDIR  = $(TOP)/pkg
 XC_OS     = "darwin linux windows"
 XC_ARCH   = "386 amd64"
 DISTDIR   = $(BUILDDIR)/dist/$(VERSION)
-PATH      = "$(PATH):$(GOPATH)/bin"
 
 help:
 	@echo "Please type: make [target]"
