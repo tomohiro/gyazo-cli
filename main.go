@@ -228,7 +228,7 @@ func storeGyazoID(id string) error {
 
 	_, err = os.Stat(path)
 	if err == nil {
-		newpath := fmt.Sprintf("%s_%s.bak", id, time.Now().Format("20060102150406"))
+		newpath := fmt.Sprintf("%s_%s.bak", id, time.Now().Format("20060102150405"))
 		err = os.Rename(path, newpath)
 		if err != nil {
 			return err
