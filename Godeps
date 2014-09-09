@@ -4,8 +4,8 @@
 	"Deps": [
 		{
 			"ImportPath": "github.com/codegangsta/cli",
-			"Comment": "1.2.0-22-g687db20",
-			"Rev": "687db20fc379d1686465a28e9959707cd1acc990"
+			"Comment": "1.2.0-24-g7381bc4",
+			"Rev": "7381bc4e62942763475703c7edd405f1e42adf4f"
 		},
 		{
 			"ImportPath": "github.com/mitchellh/go-homedir",
@@ -13,7 +13,7 @@
 		},
 		{
 			"ImportPath": "github.com/skratchdot/open-golang/open",
-			"Rev": "a09a2535ca5758662dfb0577fee1644826d8a850"
+			"Rev": "ba570a111973b539baf23c918213059543b5bb6e"
 		}
 	]
 }
