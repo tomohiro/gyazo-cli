@@ -10,6 +10,7 @@ BUILDDIR  = $(TOP)/pkg
 XC_OS     = "darwin linux windows"
 XC_ARCH   = "386 amd64"
 DISTDIR   = $(BUILDDIR)/dist/$(VERSION)
+DEPSFILE  = $(TOP)/Godeps
 
 help:
 	@echo "Please type: make [target]"
@@ -43,16 +44,18 @@ setup:
 
 install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
-	go build -o $(OUTPUT)
+	godep go build -o $(OUTPUT)
 	mv $(OUTPUT) $(GOPATH)/bin/
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	go get -d -v ./...
+	godep get
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go get -u -v ./...
+	rm $(DEPSFILE)
+	godep save -copy=false
 
 build: deps
 	@echo "===> Beginning compile..."
@@ -79,7 +82,7 @@ release:
 	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
 
 clean:
-	go clean
+	godep go clean
 	rm -rf $(BUILDDIR)
 
 .PHONY: help test setup deps updatedeps clean release
