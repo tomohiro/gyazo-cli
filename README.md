@@ -2,7 +2,7 @@ Gyazo CLI
 ================================================================================
 
 [![Build Status](https://travis-ci.org/Tomohiro/gyazo-cli.svg?branch=master)](https://travis-ci.org/Tomohiro/gyazo-cli)
-[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Tomohiro/gyazo-cli/blob/master/LICENCE)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Tomohiro/gyazo-cli/blob/master/LICENSE)
 
 Gyazo command-line uploader
 
