@@ -38,7 +38,7 @@ setup:
 	go get github.com/mitchellh/gox
 	gox -build-toolchain
 
-	# ghr - Easy to ship your project on GitHub to your user
+	# ghr - Easily ship your project to your user using Github Releases
 	go get github.com/tcnksm/ghr
 
 install: deps
