@@ -56,7 +56,7 @@ updatedeps:
 
 build: deps
 	@echo "===> Beginning compile..."
-	gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
+	GOPATH=$(shell godep path) gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
 
 dist: build
 	@echo "===> Shipping packages..."
