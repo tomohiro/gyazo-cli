@@ -32,9 +32,6 @@ test: deps
 setup:
 	@echo "===> Setup development tools..."
 
-	# Godep - Management tool for Go dependencies.
-	go get github.com/tools/godep
-
 	# Gox - Simple Go Cross Compilation
 	go get github.com/mitchellh/gox
 	gox -os $(XC_OS) -arch $(XC_ARCH) -build-toolchain
@@ -44,22 +41,20 @@ setup:
 
 install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
-	godep go build -o $(OUTPUT)
+	go build -o $(OUTPUT)
 	mv $(OUTPUT) $(GOPATH)/bin/
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	godep get
+	go get -v ./...
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go get -u -v ./...
-	rm $(DEPSFILE)
-	godep save -copy=false
 
 build: deps
 	@echo "===> Beginning compile..."
-	GOPATH=$(shell godep path) gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
+	gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
 
 dist: build
 	@echo "===> Shipping packages..."
@@ -82,7 +77,7 @@ release:
 	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
 
 clean:
-	godep go clean
+	go clean all
 	rm -rf $(BUILDDIR)
 
 .PHONY: help test setup deps updatedeps clean release
