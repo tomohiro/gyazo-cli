@@ -1,11 +1,16 @@
+sudo: false
 language: go
 
 go:
   - 1.3
+  - tip  # Use latest
+
 env:
   - PATH=/home/travis/gopath/bin:$PATH
+
 before_script:
   - make setup
   - make deps
+
 script:
   - make build
