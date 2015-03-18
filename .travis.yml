@@ -6,6 +6,7 @@ go:
   - 1.4
 
 before_script:
+  - make setup
   - make deps
 
 script:
