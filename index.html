@@ -1,111 +1,104 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta charset="UTF-8">
     <title>Gyazo CLI by Tomohiro</title>
-
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Gyazo CLI</h1>
-        <p>Gyazo command-line uploader</p>
+    <section class="page-header">
+      <h1 class="project-name">Gyazo CLI</h1>
+      <h2 class="project-tagline">Gyazo command-line uploader</h2>
+      <a href="https://github.com/Tomohiro/gyazo-cli" class="btn">View on GitHub</a>
+      <a href="https://github.com/Tomohiro/gyazo-cli/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Tomohiro/gyazo-cli/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-        <p class="view"><a href="https://github.com/Tomohiro/gyazo-cli">View the Project on GitHub <small>Tomohiro/gyazo-cli</small></a></p>
+    <section class="main-content">
+      <h1>
+<a id="gyazo-cli" class="anchor" href="#gyazo-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gyazo CLI</h1>
 
-
-        <ul>
-          <li><a href="https://github.com/Tomohiro/gyazo-cli/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/Tomohiro/gyazo-cli/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/Tomohiro/gyazo-cli">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h1>
-<a name="gyazo-cli" class="anchor" href="#gyazo-cli"><span class="octicon octicon-link"></span></a>Gyazo CLI</h1>
+<p><a href="https://github.com/Tomohiro/gyazo-cli/releases"><img src="https://img.shields.io/github/release/Tomohiro/gyazo-cli.svg?style=flat-square" alt="GitHub Releases"></a>
+<a href="https://travis-ci.org/Tomohiro/gyazo-cli"><img src="https://img.shields.io/travis/Tomohiro/gyazo-cli.svg?style=flat-square" alt="Build Status"></a>
+<a href="https://github.com/Tomohiro/gyazo-cli/blob/master/LICENSE"><img src="http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square" alt="MIT License"></a></p>
 
 <p>Gyazo command-line uploader</p>
 
 <h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <h3>
-<a name="take-a-screenshot-and-then-upload" class="anchor" href="#take-a-screenshot-and-then-upload"><span class="octicon octicon-link"></span></a>Take a screenshot and then upload</h3>
+<a id="take-a-screenshot-and-then-upload" class="anchor" href="#take-a-screenshot-and-then-upload" aria-hidden="true"><span class="octicon octicon-link"></span></a>Take a screenshot and then upload</h3>
 
 <p>NOTE: this feature is available on OS X only.</p>
 
-<div class="highlight highlight-sh"><pre><span class="nv">$ </span>gyazo
-</pre></div>
+<div class="highlight highlight-sh"><pre>$ gyazo</pre></div>
 
 <h3>
-<a name="uploading-a-specific-image" class="anchor" href="#uploading-a-specific-image"><span class="octicon octicon-link"></span></a>Uploading a specific image</h3>
+<a id="uploading-a-specific-image" class="anchor" href="#uploading-a-specific-image" aria-hidden="true"><span class="octicon octicon-link"></span></a>Uploading a specific image</h3>
 
-<div class="highlight highlight-sh"><pre><span class="nv">$ </span>gyazo ~/Desktop/image.png
-http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
-</pre></div>
+<div class="highlight highlight-sh"><pre>$ gyazo <span class="pl-k">~</span>/Desktop/image.png
+http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5</pre></div>
 
 <h2>
-<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
 
 <h3>
-<a name="use-gyazo-api-client-token" class="anchor" href="#use-gyazo-api-client-token"><span class="octicon octicon-link"></span></a>Use Gyazo API client token</h3>
+<a id="use-gyazo-api-client-token" class="anchor" href="#use-gyazo-api-client-token" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use Gyazo API client token</h3>
 
 <p>Set the access token to environment variable like this:</p>
 
-<div class="highlight highlight-sh"><pre><span class="nb">export </span><span class="nv">GYAZO_ACCESS_TOKEN</span><span class="o">=</span><span class="s2">"YOUR GYAZO API ACCESS TOKEN"</span>
-</pre></div>
+<div class="highlight highlight-sh"><pre><span class="pl-k">export</span> GYAZO_ACCESS_TOKEN=<span class="pl-s"><span class="pl-pds">"</span>YOUR GYAZO API ACCESS TOKEN<span class="pl-pds">"</span></span></pre></div>
 
 <h3>
-<a name="use-self-hosted-gyazo-server" class="anchor" href="#use-self-hosted-gyazo-server"><span class="octicon octicon-link"></span></a>Use self-hosted Gyazo server</h3>
+<a id="use-self-hosted-gyazo-server" class="anchor" href="#use-self-hosted-gyazo-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use self-hosted Gyazo server</h3>
 
 <p>Set the server URL to environment variable like this:</p>
 
-<div class="highlight highlight-sh"><pre><span class="nb">export </span><span class="nv">GYAZO_SERVER_URL</span><span class="o">=</span><span class="s2">"http://my-gyazo.example.com"</span>
-</pre></div>
+<div class="highlight highlight-sh"><pre><span class="pl-k">export</span> GYAZO_SERVER_URL=<span class="pl-s"><span class="pl-pds">"</span>http://my-gyazo.example.com<span class="pl-pds">"</span></span></pre></div>
 
 <h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <h3>
-<a name="get-the-stable-binary" class="anchor" href="#get-the-stable-binary"><span class="octicon octicon-link"></span></a>Get the stable binary</h3>
+<a id="get-the-stable-binary" class="anchor" href="#get-the-stable-binary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Get the stable binary</h3>
 
 <p>Go to the <a href="https://github.com/Tomohiro/gyazo-cli/releases">release page</a> and download a zip file.</p>
 
 <h3>
-<a name="go-get" class="anchor" href="#go-get"><span class="octicon octicon-link"></span></a>go get</h3>
+<a id="go-get" class="anchor" href="#go-get" aria-hidden="true"><span class="octicon octicon-link"></span></a>go get</h3>
 
 <p>Install to <code>$GOPATH/bin</code>:</p>
 
-<div class="highlight highlight-sh"><pre><span class="nv">$ </span>go get -d github.com/Tomohiro/gyazo-cli
-<span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/Tomohiro/gyazo-cli
-<span class="nv">$ </span>make install
-</pre></div>
+<div class="highlight highlight-sh"><pre>$ go get -d github.com/Tomohiro/gyazo-cli
+$ <span class="pl-c1">cd</span> <span class="pl-smi">$GOPATH</span>/src/github.com/Tomohiro/gyazo-cli
+$ make install</pre></div>
 
 <h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <p>Please check out the <a href="CONTRIBUTING.md">CONTIRBUTING.md</a>.</p>
 
 <h2>
-<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>LICENSE</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>LICENSE</h2>
 
-<p>© 2014 Tomohiro TAIRA.
+<p>© 2014 - 2015 Tomohiro TAIRA.
 This project is licensed under the MIT license.
 See LICENSE for details.</p>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/Tomohiro">Tomohiro</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Tomohiro/gyazo-cli">Gyazo CLI</a> is maintained by <a href="https://github.com/Tomohiro">Tomohiro</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+
+    </section>
+
+  
   </body>
 </html>
+
