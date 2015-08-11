@@ -32,11 +32,10 @@ setup:
 	@echo "===> Setup development tools..."
 
 	# Gox - Simple Go Cross Compilation
-	go get github.com/mitchellh/gox
-	gox -os $(XC_OS) -arch $(XC_ARCH) -build-toolchain
+	go get -u github.com/mitchellh/gox
 
 	# ghr - Easily ship your project to your user using Github Releases
-	go get github.com/tcnksm/ghr
+	go get -u github.com/tcnksm/ghr
 
 install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
@@ -49,6 +48,7 @@ deps:
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
+	go clean ./...
 	go get -u -v ./...
 
 build: deps
