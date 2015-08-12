@@ -39,21 +39,22 @@ setup:
 
 install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
-	go build -o $(OUTPUT)
+	godep go build -o $(OUTPUT)
 	mv $(OUTPUT) $(GOPATH)/bin/
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	go get -v ./...
+	godep restore
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go clean ./...
 	go get -u -v ./...
+	godep save
 
 build: deps
 	@echo "===> Beginning compile..."
-	gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
+	godep gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
 
 dist: build
 	@echo "===> Shipping packages..."
@@ -76,7 +77,7 @@ release:
 	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
 
 clean:
-	go clean all
+	go clean ./...
 	rm -rf $(BUILDDIR)
 
 .PHONY: help test setup deps updatedeps clean release

@@ -1,9 +1,6 @@
 {
 	"ImportPath": "github.com/Tomohiro/gyazo-cli",
 	"GoVersion": "go1.5rc1",
-	"Packages": [
-		"./..."
-	],
 	"Deps": [
 		{
 			"ImportPath": "github.com/codegangsta/cli",
