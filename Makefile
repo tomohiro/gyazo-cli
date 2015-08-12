@@ -39,22 +39,21 @@ setup:
 
 install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
-	godep go build -o $(OUTPUT)
+	go build -o $(OUTPUT)
 	mv $(OUTPUT) $(GOPATH)/bin/
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	godep restore
+	go get -v ./...
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go clean ./...
 	go get -u -v ./...
-	godep save
 
 build: deps
 	@echo "===> Beginning compile..."
-	godep gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
+	gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
 
 dist: build
 	@echo "===> Shipping packages..."
