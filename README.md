@@ -78,5 +78,4 @@ LICENSE
 --------------------------------------------------------------------------------
 
 &copy; 2014 - 2015 Tomohiro TAIRA.
-This project is licensed under the MIT license.
 See LICENSE for details.
