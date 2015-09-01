@@ -33,7 +33,6 @@ setup:
 
 	# Gox - Simple Go Cross Compilation
 	go get -u github.com/mitchellh/gox
-	gox -os $(XC_OS) -arch $(XC_ARCH) -build-toolchain
 
 	# ghr - Easily ship your project to your user using Github Releases
 	go get -u github.com/tcnksm/ghr
