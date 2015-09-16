@@ -13,7 +13,7 @@ Usage
 
 ### Take a screenshot and then upload
 
-NOTE: this feature is available on OS X only.
+NOTE: this feature is not available on Windows(Imagemagick is required on Linux).
 
 ```sh
 $ gyazo
