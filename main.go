@@ -31,8 +31,10 @@ var (
 )
 
 func main() {
-	defer os.Exit(exitCode)
+	os.Exit(realMain())
+}
 
+func realMain() int {
 	app := cli.NewApp()
 	app.Name = "gyazo"
 	app.Version = Version
@@ -41,6 +43,8 @@ func main() {
 	app.Email = "tomohiro.t@gmail.com"
 	app.Action = upload
 	app.Run(os.Args)
+
+	return exitCode
 }
 
 // Set the endpoint of Gyazo API.
