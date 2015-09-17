@@ -154,11 +154,7 @@ func takeScreenshot() (string, error) {
 	case "darwin":
 		err = exec.Command("screencapture", "-i", path).Run()
 	case "linux":
-		if _, err := exec.LookPath("import"); err == nil {
-			err = exec.Command("import", path).Run()
-		} else {
-			return "", fmt.Errorf("'import' command not found")
-		}
+		err = exec.Command("import", path).Run()
 	case "windows":
 		err = errors.New("unsupported os")
 	}
