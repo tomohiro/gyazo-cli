@@ -71,7 +71,7 @@ $ make install
 Contributing
 --------------------------------------------------------------------------------
 
-Please check out the [CONTIRBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING](CONTRIBUTING.md) guideline.
 
 
 LICENSE
