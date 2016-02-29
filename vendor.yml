@@ -1,0 +1,19 @@
+vendors:
+- path: github.com/Tomohiro/go-gyazo
+  rev: d4ae06291a26d7209dd3b472b29182cf74e0a2be
+- path: github.com/codegangsta/cli
+  rev: a2943485b110df8842045ae0600047f88a3a56a1
+- path: github.com/golang/protobuf
+  rev: 552c7b9542c194800fd493123b3798ef0a832032
+- path: github.com/google/go-querystring
+  rev: 6bb77fe6f42b85397288d4f6f67ac72f8f400ee7
+- path: github.com/mitchellh/go-homedir
+  rev: d682a8f0cf139663a984ff12528da460ca963de9
+- path: github.com/skratchdot/open-golang
+  rev: c8748311a7528d0ba7330d302adbc5a677ef9c9e
+- path: golang.org/x/net
+  rev: 6acef71eb69611914f7a30939ea9f6e194c78172
+- path: golang.org/x/oauth2
+  rev: 2cd4472c321b6cba78e029d99f0e7fe51032fd21
+- path: google.golang.org/appengine
+  rev: 6a436539be38c296a8075a871cc536686b458371
