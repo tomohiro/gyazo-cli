@@ -31,7 +31,7 @@ test: deps
 setup:
 	@echo "===> Setup development tools..."
 
-# govend - A simple tool to vendor Go package dependencies
+	# govend - A simple tool to vendor Go package dependencies
 	go get -u github.com/govend/govend
 
 	# Gox - Simple Go Cross Compilation
