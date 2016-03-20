@@ -7,6 +7,7 @@ VERSION    = $(shell grep "const Version " $(TOP)/version.go | sed -E 's/.*"(.+)
 # Build information
 OUTPUT    = gyazo
 BUILDDIR  = $(TOP)/pkg
+VENDORDIR = $(TOP)/vendor
 XC_OS     = "darwin linux windows"
 XC_ARCH   = "386 amd64"
 DISTDIR   = $(BUILDDIR)/dist/$(VERSION)
@@ -79,6 +80,7 @@ release:
 
 clean:
 	go clean ./...
+	rm -rf $(VENDORDIR)
 	rm -rf $(BUILDDIR)
 
 .PHONY: help test setup deps updatedeps clean release
