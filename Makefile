@@ -32,9 +32,6 @@ test: deps
 setup:
 	@echo "===> Setup development tools..."
 
-	# govend - A simple tool to vendor Go package dependencies
-	go get -u github.com/govend/govend
-
 	# Gox - Simple Go Cross Compilation
 	go get -u github.com/mitchellh/gox
 
@@ -48,11 +45,11 @@ install: deps
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	govend -v
+	glide install
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
-	govend -v -u
+	glide update
 
 build: deps
 	@echo "===> Beginning compile..."
