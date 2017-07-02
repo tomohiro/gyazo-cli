@@ -78,6 +78,6 @@ See [CONTRIBUTING](CONTRIBUTING.md) guideline.
 LICENSE
 --------------------------------------------------------------------------------
 
-&copy; 2014 - 2015 Tomohiro TAIRA.
+&copy; 2014 - 2017 Tomohiro TAIRA.
 
 This project is licensed under the MIT license. See [LICENSE](LICENSE) for details.
