@@ -43,8 +43,7 @@ setup:
 
 install: deps
 	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
-	go build -o $(OUTPUT)
-	mv $(OUTPUT) $(GOPATH)/bin/
+	go build -o $(GOPATH)/bin/$(OUTPUT)
 
 deps:
 	@echo "===> Installing runtime dependencies..."
