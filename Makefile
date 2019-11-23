@@ -47,11 +47,11 @@ install: deps
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	dep ensure
+	go mod download
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
-	dep ensure -update
+	go get -u
 
 build: deps
 	@echo "===> Beginning compile..."
