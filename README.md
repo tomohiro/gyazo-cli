@@ -76,6 +76,6 @@ See [CONTRIBUTING](CONTRIBUTING.md) guideline.
 LICENSE
 --------------------------------------------------------------------------------
 
-&copy; 2014 - 2017 Tomohiro Taira.
+&copy; 2014 - 2019 Tomohiro Taira.
 
 This project is licensed under the MIT license. See [LICENSE](LICENSE) for details.
