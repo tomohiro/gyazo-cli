@@ -19,7 +19,7 @@ help:
 	@echo "  install      Build $(PACKAGE) and install to $$GOPATH/bin"
 	@echo "  dist         Ship packages as release assets"
 	@echo "  release      Publish release assets to GitHub"
-	@echo "  clean        Cleanup artifacts"
+	@echo "  clean        Cleanup assets"
 	@echo "  help         Show this help messages"
 
 setup:
@@ -45,9 +45,9 @@ install: deps
 
 dist:
 	@echo "===> Shipping packages as release assets..."
-	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) -n $(PACKAGE) -o $(PACKAGE)
+	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) -n $(PACKAGE) -o $(PACKAGE) -z
 	pushd $(ASSETS_DIR); \
-	shasum -a 256 *.(zip|tar.gz) > ./$(VERSION)_SHA256SUMS; \
+	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
 	popd; \
 
 release:
