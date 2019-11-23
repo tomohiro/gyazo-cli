@@ -4,7 +4,6 @@ REPOSITORY = $(shell basename $(PWD))
 VERSION    = $(shell grep "const Version " $(PWD)/version.go | sed -E 's/.*"(.+)"$$/\1/')
 
 # Build information
-PACKAGE    = gyazo
 DIST_DIR   = $(PWD)/dist
 ASSETS_DIR = $(DIST_DIR)/$(VERSION)
 XC_OS      = "linux darwin windows"
@@ -16,7 +15,6 @@ help:
 	@echo "  setup        Setup development environment"
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
-	@echo "  install      Build $(PACKAGE) and install to $$GOPATH/bin"
 	@echo "  dist         Ship packages as release assets"
 	@echo "  release      Publish release assets to GitHub"
 	@echo "  clean        Cleanup assets"
@@ -39,13 +37,9 @@ updatedeps:
 	@echo "===> Updating runtime dependencies..."
 	go get -u
 
-install: deps
-	@echo "===> Installing '$(PACKAGE)' to $(GOPATH)/bin..."
-	go build -o $(GOPATH)/bin/$(PACKAGE)
-
 dist:
 	@echo "===> Shipping packages as release assets..."
-	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) -n $(PACKAGE) -o $(PACKAGE) -z
+	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) -z
 	pushd $(ASSETS_DIR); \
 	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
 	popd; \

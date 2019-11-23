@@ -16,15 +16,15 @@ Usage
 
 NOTE: this feature is not available on Windows. ([ImageMagick](http://www.imagemagick.org/script/index.php) is required for Linux users)
 
-```sh
-$ gyazo
+```
+$ gyazo-cli
 ```
 
 
 ### Uploading a specific image
 
-```sh
-$ gyazo ~/Desktop/image.png
+```
+$ gyazo-cli ~/Desktop/image.png
 http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
 ```
 
@@ -36,7 +36,7 @@ Configuration
 
 Set the access token to environment variable like this:
 
-```sh
+```
 export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
 ```
 
@@ -45,7 +45,7 @@ export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
 
 Set the server URL to environment variable like this:
 
-```sh
+```
 export GYAZO_SERVER_URL="http://my-gyazo.example.com"
 ```
 
@@ -62,10 +62,8 @@ Go to the [release page](https://github.com/tomohiro/gyazo-cli/releases) and dow
 
 Install to `$GOPATH/bin`:
 
-```sh
-$ go get -d github.com/tomohiro/gyazo-cli
-$ cd $GOPATH/src/github.com/tomohiro/gyazo-cli
-$ make install
+```
+$ GO111MODULE=off go get -u github.com/tomohiro/gyazo-cli
 ```
 
 
