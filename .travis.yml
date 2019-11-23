@@ -5,11 +5,10 @@ go:
   - 1.13
 
 before_script:
-  - make setup
   - make deps
 
 script:
-  - make build
+  - go build
 
 notifications:
   email: false
