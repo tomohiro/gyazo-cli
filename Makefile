@@ -32,9 +32,6 @@ test: deps
 setup:
 	@echo "===> Setup development tools..."
 
-	# dep - Go dependency tool
-	go get -u github.com/golang/dep/cmd/dep
-
 	# Gox - Simple Go Cross Compilation
 	go get -u github.com/mitchellh/gox
 
