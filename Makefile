@@ -26,10 +26,10 @@ setup:
 	@echo "===> Setup development tools..."
 
 	# goxz - Just do cross building and archiving go tools conventionally
-	GO111MODULE=off go get -u github.com/Songmu/goxz/cmd/goxz
+	GO111MODULE=off go get github.com/Songmu/goxz/cmd/goxz
 
 	# ghr - Upload multiple artifacts to GitHub Release in parallel
-	GO111MODULE=off go get -u github.com/tcnksm/ghr
+	GO111MODULE=off go get github.com/tcnksm/ghr
 
 deps:
 	@echo "===> Installing runtime dependencies..."
