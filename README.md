@@ -1,10 +1,10 @@
 Gyazo CLI
 ================================================================================
 
-[![GitHub Releases](https://img.shields.io/github/release/Tomohiro/gyazo-cli.svg?style=flat-square)](https://github.com/Tomohiro/gyazo-cli/releases)
-[![Build Status](https://img.shields.io/travis/Tomohiro/gyazo-cli.svg?style=flat-square)](https://travis-ci.org/Tomohiro/gyazo-cli)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Tomohiro/gyazo-cli?style=flat-square)](https://goreportcard.com/report/github.com/Tomohiro/gyazo-cli)
-[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/Tomohiro/gyazo-cli/blob/master/LICENSE)
+[![GitHub Releases](https://img.shields.io/github/release/tomohiro/gyazo-cli.svg?style=flat-square)](https://github.com/tomohiro/gyazo-cli/releases)
+[![Build Status](https://img.shields.io/travis/tomohiro/gyazo-cli.svg?style=flat-square)](https://travis-ci.org/tomohiro/gyazo-cli)
+[![Go Report Card](https://goreportcard.com/badge/github.com/tomohiro/gyazo-cli?style=flat-square)](https://goreportcard.com/report/github.com/tomohiro/gyazo-cli)
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tomohiro/gyazo-cli/blob/master/LICENSE)
 
 Gyazo command-line uploader
 
@@ -55,7 +55,7 @@ Installation
 
 ### Get the stable binary
 
-Go to the [release page](https://github.com/Tomohiro/gyazo-cli/releases) and download a zip file.
+Go to the [release page](https://github.com/tomohiro/gyazo-cli/releases) and download a zip file.
 
 
 ### go get
@@ -63,8 +63,8 @@ Go to the [release page](https://github.com/Tomohiro/gyazo-cli/releases) and dow
 Install to `$GOPATH/bin`:
 
 ```sh
-$ go get -d github.com/Tomohiro/gyazo-cli
-$ cd $GOPATH/src/github.com/Tomohiro/gyazo-cli
+$ go get -d github.com/tomohiro/gyazo-cli
+$ cd $GOPATH/src/github.com/tomohiro/gyazo-cli
 $ make install
 ```
 
@@ -78,6 +78,6 @@ See [CONTRIBUTING](CONTRIBUTING.md) guideline.
 LICENSE
 --------------------------------------------------------------------------------
 
-&copy; 2014 - 2017 Tomohiro TAIRA.
+&copy; 2014 - 2017 Tomohiro Taira.
 
 This project is licensed under the MIT license. See [LICENSE](LICENSE) for details.
