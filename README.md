@@ -2,7 +2,7 @@ Gyazo CLI
 ================================================================================
 
 [![GitHub Releases](https://img.shields.io/github/release/tomohiro/gyazo-cli.svg?style=flat-square)](https://github.com/tomohiro/gyazo-cli/releases)
-[![Build Status](https://img.shields.io/travis/tomohiro/gyazo-cli.svg?style=flat-square)](https://travis-ci.org/tomohiro/gyazo-cli)
+[![Build Status](https://img.shields.io/travis/com/tomohiro/gyazo-cli.svg?style=flat-square)](https://travis-ci.com/tomohiro/gyazo-cli)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tomohiro/gyazo-cli?style=flat-square)](https://goreportcard.com/report/github.com/tomohiro/gyazo-cli)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/tomohiro/gyazo-cli/blob/master/LICENSE)
 
