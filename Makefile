@@ -4,10 +4,11 @@ REPOSITORY = $(shell basename $(PWD))
 VERSION    = $(shell grep "const Version " $(PWD)/version.go | sed -E 's/.*"(.+)"$$/\1/')
 
 # Build information
-DIST_DIR   = $(PWD)/dist
-ASSETS_DIR = $(DIST_DIR)/$(VERSION)
-XC_OS      = "linux darwin windows"
-XC_ARCH    = "386 amd64"
+DIST_DIR      = $(PWD)/dist
+ASSETS_DIR    = $(DIST_DIR)/$(VERSION)
+XC_OS         = "linux darwin windows"
+XC_ARCH       = "386 amd64"
+BUILD_LDFLAGS = "-w -s"
 
 # Tasks
 help:
@@ -39,14 +40,14 @@ updatedeps:
 
 dist:
 	@echo "===> Shipping packages as release assets..."
-	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) -z
+	goxz -d=$(ASSETS_DIR) -os=$(XC_OS) -arch=$(XC_ARCH) --build-ldflags=$(BUILD_LDFLAGS) -pv=$(VERSION) -z
 	pushd $(ASSETS_DIR); \
 	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
 	popd; \
 
 release:
 	@echo "===> Publishing to GitHub..."
-	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(ASSETS_DIR)
+	ghr -u=$(OWNER) -r=$(REPOSITORY) $(VERSION) $(ASSETS_DIR)
 
 clean:
 	@echo "===> Cleaning assets..."
