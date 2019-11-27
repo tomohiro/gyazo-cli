@@ -22,9 +22,17 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
+const (
+	// ExitCodeOK represents succeed exit status
+	ExitCodeOK int = 0
+
+	// ExitCodeError represents failed exit status
+	ExitCodeError int = 1
+)
+
 var (
 	// exitCode to terminate.
-	exitCode = 0
+	exitCode = ExitCodeOK
 
 	// Default endpoint.
 	endpoint = "http://upload.gyazo.com/upload.cgi"
@@ -50,7 +58,7 @@ func realMain() int {
 	err := app.Run(os.Args)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error: %s\n", err)
-		exitCode = 1
+		exitCode = ExitCodeError
 	}
 
 	return exitCode
@@ -74,7 +82,7 @@ func upload(c *cli.Context) error {
 	if filename == "" {
 		filename, err = takeScreenshot()
 		if err != nil {
-			fmt.Fprint(os.Stderr, "Failed to take a screenshot")
+			fmt.Fprint(os.Stderr, "Failed to take a screenshot\n")
 			return err
 		}
 	}
