@@ -16,10 +16,10 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/tomohiro/go-gyazo/gyazo"
-	"github.com/urfave/cli"
 	"github.com/mitchellh/go-homedir"
 	"github.com/skratchdot/open-golang/open"
+	"github.com/tomohiro/go-gyazo/gyazo"
+	"github.com/urfave/cli"
 )
 
 var (
@@ -36,10 +36,10 @@ func main() {
 
 func realMain() int {
 	app := cli.NewApp()
-	app.Name = "gyazo"
+	app.Name = "gyazo-cli"
 	app.Version = Version
 	app.Usage = "Gyazo command-line uploader"
-	app.Author = "Tomohiro TAIRA"
+	app.Author = "Tomohiro Taira"
 	app.Email = "tomohiro.t@gmail.com"
 	app.Action = upload
 	app.Run(os.Args)
