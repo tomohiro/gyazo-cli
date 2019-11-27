@@ -19,7 +19,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"github.com/skratchdot/open-golang/open"
 	"github.com/tomohiro/go-gyazo/gyazo"
-	"github.com/urfave/cli"
+	"github.com/urfave/cli/v2"
 )
 
 var (
@@ -35,14 +35,23 @@ func main() {
 }
 
 func realMain() int {
-	app := cli.NewApp()
-	app.Name = "gyazo-cli"
-	app.Version = Version
-	app.Usage = "Gyazo command-line uploader"
-	app.Author = "Tomohiro Taira"
-	app.Email = "tomohiro.t@gmail.com"
-	app.Action = upload
-	app.Run(os.Args)
+	app := &cli.App{
+		Name:    "gyazo-cli",
+		Usage:   "Gyazo command-line uploader",
+		Action:  upload,
+		Version: Version,
+		Authors: []*cli.Author{
+			&cli.Author{
+				Name:  "Tomohiro Taira",
+				Email: "tomohiro.t@gmail.com",
+			},
+		},
+	}
+	err := app.Run(os.Args)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error: %s\n", err)
+		exitCode = 1
+	}
 
 	return exitCode
 }
@@ -55,7 +64,7 @@ func init() {
 }
 
 // Upload a new image to a Gyazo from the specified local image file.
-func upload(c *cli.Context) {
+func upload(c *cli.Context) error {
 	var filename string
 	var url string
 	var err error
@@ -65,23 +74,20 @@ func upload(c *cli.Context) {
 	if filename == "" {
 		filename, err = takeScreenshot()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to take a screenshot: %s\n", err)
-			exitCode = 1
-			return
+			fmt.Fprint(os.Stderr, "Failed to take a screenshot")
+			return err
 		}
 	}
 
 	if !supportedMimetype(filename) {
 		fmt.Fprint(os.Stderr, "Failed to upload: unsupported file type\n")
-		exitCode = 1
-		return
+		return err
 	}
 
 	// Open and load the content from an image.
 	content, err := os.Open(filename)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Failed to open and read: %s\n", filename)
-		return
+		return err
 	}
 	defer content.Close()
 
@@ -89,9 +95,8 @@ func upload(c *cli.Context) {
 		gyazo, _ := gyazo.NewClient(os.Getenv("GYAZO_ACCESS_TOKEN"))
 		image, err := gyazo.Upload(content)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Failed to upload: %s\n", err)
-			exitCode = 1
-			return
+			fmt.Fprint(os.Stderr, "Failed to upload via API request\n")
+			return err
 		}
 		url = image.PermalinkURL
 	} else {
@@ -101,36 +106,31 @@ func upload(c *cli.Context) {
 
 		part, err := writer.CreateFormFile("imagedata", filename)
 		if err != nil {
-			exitCode = 1
-			return
+			return err
 		}
 
 		if _, err = io.Copy(part, content); err != nil {
-			exitCode = 1
-			return
+			return err
 		}
 
 		writer.WriteField("id", gyazoID())
 		err = writer.Close()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to create multipart/data: %s\n", err)
-			exitCode = 1
-			return
+			return err
 		}
 
 		res, err := http.Post(endpoint, writer.FormDataContentType(), body)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Failed to upload: %s\n", err)
-			exitCode = 1
-			return
+			return err
 		}
 		defer res.Body.Close()
 
 		url, err = imageURL(res)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Response error: %s\n", err)
-			exitCode = 1
-			return
+			fmt.Fprintf(os.Stderr, "Invalid response: %s\n", err)
+			return err
 		}
 	}
 
@@ -139,6 +139,7 @@ func upload(c *cli.Context) {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to open by default browser: %s\n", err)
 	}
+	return err
 }
 
 // takeScreenshot takes a screenshot and then returns it file path.

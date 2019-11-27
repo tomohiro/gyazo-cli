@@ -22,8 +22,8 @@ github.com/skratchdot/open-golang v0.0.0-20190402232053-79abb63cd66e h1:VAzdS5Nw
 github.com/skratchdot/open-golang v0.0.0-20190402232053-79abb63cd66e/go.mod h1:sUM3LWHvSMaG192sy56D9F7CNvL7jUJVXoqM1QKLnog=
 github.com/tomohiro/go-gyazo v0.0.0-20191123092424-ee39601b096d h1:O+AYOMD0O56jVWHFJ1iP4fKnc+ffQCa1pW3wV1cLm5k=
 github.com/tomohiro/go-gyazo v0.0.0-20191123092424-ee39601b096d/go.mod h1:eUwdE1i+WhlTMNNHE8wy9R5Sb+FdpxZpF+49DAX/er8=
-github.com/urfave/cli v1.22.2 h1:gsqYFH8bb9ekPA12kRo0hfjngWQjkJPlN9R0N78BoUo=
-github.com/urfave/cli v1.22.2/go.mod h1:Gos4lmkARVdJ6EkW0WaNv/tZAAMe9V7XWyB60NtXRu0=
+github.com/urfave/cli/v2 v2.0.0 h1:+HU9SCbu8GnEUFtIBfuUNXN39ofWViIEJIp6SURMpCg=
+github.com/urfave/cli/v2 v2.0.0/go.mod h1:SE9GqnLQmjVa0iPEY0f1w3ygNIYcIJ0OKPMoW2caLfQ=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
 golang.org/x/net v0.0.0-20180724234803-3673e40ba225/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20190108225652-1e06a53dbb7e/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
