@@ -2,13 +2,14 @@
 OWNER      = "tomohiro"
 REPOSITORY = $(shell basename $(PWD))
 VERSION    = $(shell grep "const Version " $(PWD)/version.go | sed -E 's/.*"(.+)"$$/\1/')
+REVISION   = $(shell git rev-parse --short HEAD)
 
 # Build information
 DIST_DIR      = $(PWD)/dist
 ASSETS_DIR    = $(DIST_DIR)/$(VERSION)
 XC_OS         = "linux darwin windows"
 XC_ARCH       = "386 amd64"
-BUILD_LDFLAGS = "-w -s"
+BUILD_LDFLAGS = "-w -s -X main.revision=$(REVISION)"
 
 # Tasks
 help:

@@ -48,7 +48,7 @@ func realMain() int {
 		Usage:     "Gyazo command-line uploader",
 		UsageText: "gyazo-cli [global options] [PATH]",
 		Action:    upload,
-		Version:   fmt.Sprintf("%s-%s (build/%s)", Version, revision, runtime.Version()),
+		Version:   fmt.Sprintf("%s (rev %s) [%s %s %s]", Version, revision, runtime.GOOS, runtime.GOARCH, runtime.Version()),
 		Authors: []*cli.Author{
 			&cli.Author{
 				Name:  "Tomohiro Taira",
