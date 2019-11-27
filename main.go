@@ -23,10 +23,10 @@ import (
 )
 
 const (
-	// ExitCodeOK represents succeed exit status
+	// ExitCodeOK represents succeed exit status.
 	ExitCodeOK int = 0
 
-	// ExitCodeError represents failed exit status
+	// ExitCodeError represents failed exit status.
 	ExitCodeError int = 1
 )
 
