@@ -70,7 +70,7 @@ $ GO111MODULE=off go get -u github.com/tomohiro/gyazo-cli
 Contributing
 --------------------------------------------------------------------------------
 
-See [CONTRIBUTING](CONTRIBUTING.md) guideline.
+See [CONTRIBUTING](https://github.com/tomohiro/gyazo-cli/blob/master/CONTRIBUTING.md) guideline.
 
 
 LICENSE
