@@ -1,5 +1,5 @@
 Description
---------------------------------------------------------------------------------
+================================================================================
 
 Gyazo command-line uploader
 
@@ -7,19 +7,24 @@ Gyazo command-line uploader
 Usage
 --------------------------------------------------------------------------------
 
-### Take a screenshot and then upload
+```
+$ gyazo-cli [PATH]
+```
+
+### Example
+
+#### Take a screenshot and then upload
 
 NOTE: this feature is not available on Windows. ([ImageMagick](http://www.imagemagick.org/script/index.php) is required for Linux users)
 
-```sh
-$ gyazo
+```
+$ gyazo-cli
 ```
 
+#### Uploading a specific image
 
-### Uploading a specific image
-
-```sh
-$ gyazo ~/Desktop/image.png
+```
+$ gyazo-cli ~/Desktop/image.png
 http://gyazo.com/f1380d79593d2aaa0fcd412511f3d3e5
 ```
 
@@ -31,7 +36,7 @@ Configuration
 
 Set the access token to environment variable like this:
 
-```sh
+```
 export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
 ```
 
@@ -40,7 +45,7 @@ export GYAZO_ACCESS_TOKEN="YOUR GYAZO API ACCESS TOKEN"
 
 Set the server URL to environment variable like this:
 
-```sh
+```
 export GYAZO_SERVER_URL="http://my-gyazo.example.com"
 ```
 
@@ -50,29 +55,27 @@ Installation
 
 ### Get the stable binary
 
-Go to the [release page](https://github.com/Tomohiro/gyazo-cli/releases) and download a zip file.
+Go to the [release page](https://github.com/tomohiro/gyazo-cli/releases) and download a zip file.
 
 
 ### go get
 
 Install to `$GOPATH/bin`:
 
-```sh
-$ go get -d github.com/Tomohiro/gyazo-cli
-$ cd $GOPATH/src/github.com/Tomohiro/gyazo-cli
-$ make install
+```
+$ GO111MODULE=off go get -u github.com/tomohiro/gyazo-cli
 ```
 
 
 Contributing
 --------------------------------------------------------------------------------
 
-Please check out the [CONTIRBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING](CONTRIBUTING.md) guideline.
 
 
 LICENSE
 --------------------------------------------------------------------------------
 
-&copy; 2014 - 2015 Tomohiro TAIRA.
+&copy; 2014 - 2019 Tomohiro Taira.
 
-This project licensed under the MIT license. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT license. See [LICENSE](LICENSE) for details.
