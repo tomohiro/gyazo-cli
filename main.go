@@ -16,8 +16,8 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/Tomohiro/go-gyazo/gyazo"
-	"github.com/codegangsta/cli"
+	"github.com/tomohiro/go-gyazo/gyazo"
+	"github.com/urfave/cli"
 	"github.com/mitchellh/go-homedir"
 	"github.com/skratchdot/open-golang/open"
 )

@@ -2,14 +2,14 @@ language: go
 sudo: false
 
 go:
-  - 1.8
+  - 1.13
 
 before_script:
-  - make setup
   - make deps
 
 script:
-  - make build
+  - go install
+  - gyazo-cli -v
 
 notifications:
   email: false

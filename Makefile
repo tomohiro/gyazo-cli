@@ -1,85 +1,56 @@
 # Project information
-OWNER      = $(shell whoami)
-TOP        = $(shell pwd)
-REPOSITORY = $(shell basename $(TOP))
-VERSION    = $(shell grep "const Version " $(TOP)/version.go | sed -E 's/.*"(.+)"$$/\1/')
+OWNER      = "tomohiro"
+REPOSITORY = $(shell basename $(PWD))
+VERSION    = $(shell grep "const Version " $(PWD)/version.go | sed -E 's/.*"(.+)"$$/\1/')
 
 # Build information
-OUTPUT    = gyazo
-BUILDDIR  = $(TOP)/pkg
-VENDORDIR = $(TOP)/vendor
-XC_OS     = "darwin linux windows"
-XC_ARCH   = "386 amd64"
-DISTDIR   = $(BUILDDIR)/dist/$(VERSION)
+DIST_DIR   = $(PWD)/dist
+ASSETS_DIR = $(DIST_DIR)/$(VERSION)
+XC_OS      = "linux darwin windows"
+XC_ARCH    = "386 amd64"
 
+# Tasks
 help:
 	@echo "Please type: make [target]"
-	@echo "  test         Run tests"
 	@echo "  setup        Setup development environment"
-	@echo "  install      Build $(OUTPUT) and install to $$GOPATH/bin"
 	@echo "  deps         Install runtime dependencies"
 	@echo "  updatedeps   Update runtime dependencies"
-	@echo "  build        Build $(OUTPUT) in to the pkg directory"
-	@echo "  dist         Ship packages to release"
-	@echo "  release      Create tag ($(VERSION)) and upload binaries to GitHub"
-	@echo "  clean        Cleanup artifacts"
+	@echo "  dist         Ship packages as release assets"
+	@echo "  release      Publish release assets to GitHub"
+	@echo "  clean        Cleanup assets"
 	@echo "  help         Show this help messages"
-
-test: deps
-	@echo "===> Running tests..."
-	go test -v ./...
 
 setup:
 	@echo "===> Setup development tools..."
 
-	# dep - Go dependency tool
-	go get -u github.com/golang/dep/cmd/dep
+	# goxz - Just do cross building and archiving go tools conventionally
+	GO111MODULE=off go get github.com/Songmu/goxz/cmd/goxz
 
-	# Gox - Simple Go Cross Compilation
-	go get -u github.com/mitchellh/gox
-
-	# ghr - Easily ship your project to your user using Github Releases
-	go get -u github.com/tcnksm/ghr
-
-install: deps
-	@echo "===> Installing '$(OUTPUT)' to $(GOPATH)/bin..."
-	go build -o $(GOPATH)/bin/$(OUTPUT)
+	# ghr - Upload multiple artifacts to GitHub Release in parallel
+	GO111MODULE=off go get github.com/tcnksm/ghr
 
 deps:
 	@echo "===> Installing runtime dependencies..."
-	dep ensure
+	go mod download
 
 updatedeps:
 	@echo "===> Updating runtime dependencies..."
-	dep ensure -update
+	go get -u
 
-build: deps
-	@echo "===> Beginning compile..."
-	gox -os $(XC_OS) -arch $(XC_ARCH) -output "pkg/{{.OS}}_{{.Arch}}/$(OUTPUT)"
-
-dist: build
-	@echo "===> Shipping packages..."
-	rm -rf $(DISTDIR)
-	mkdir -p $(DISTDIR)
-	@for dir in $$(find $(BUILDDIR) -mindepth 1 -maxdepth 1 -type d); do \
-		platform=`basename $$dir`; \
-		if [ $$platform = "dist" ]; then \
-			continue; \
-		fi; \
-		archive=$(OUTPUT)_$(VERSION)_$$platform; \
-		zip -j $(DISTDIR)/$$archive.zip $$dir/*; \
-		pushd $(DISTDIR); \
-		shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
-		popd; \
-	done
+dist:
+	@echo "===> Shipping packages as release assets..."
+	goxz -d $(ASSETS_DIR) -os $(XC_OS) -arch $(XC_ARCH) -pv $(VERSION) -z
+	pushd $(ASSETS_DIR); \
+	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
+	popd; \
 
 release:
 	@echo "===> Publishing to GitHub..."
-	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(DISTDIR)
+	ghr -u $(OWNER) -r $(REPOSITORY) $(VERSION) $(ASSETS_DIR)
 
 clean:
+	@echo "===> Cleaning assets..."
 	go clean ./...
-	rm -rf $(VENDORDIR)
-	rm -rf $(BUILDDIR)
+	rm -rf $(DIST_DIR)
 
-.PHONY: help test setup deps updatedeps clean release
+.PHONY: help setup deps updatedeps dist release clean

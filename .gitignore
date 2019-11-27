@@ -6,7 +6,6 @@
 # Folders
 _obj
 _test
-vendor
 pkg
 
 # Architecture specific extensions/prefixes
@@ -24,3 +23,7 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Output
+gyazo-cli
+dist
