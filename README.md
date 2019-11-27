@@ -12,7 +12,13 @@ Gyazo command-line uploader
 Usage
 --------------------------------------------------------------------------------
 
-### Take a screenshot and then upload
+```
+$ gyazo-cli [PATH]
+```
+
+### Example
+
+#### Take a screenshot and then upload
 
 NOTE: this feature is not available on Windows. ([ImageMagick](http://www.imagemagick.org/script/index.php) is required for Linux users)
 
@@ -20,8 +26,7 @@ NOTE: this feature is not available on Windows. ([ImageMagick](http://www.imagem
 $ gyazo-cli
 ```
 
-
-### Uploading a specific image
+#### Uploading a specific image
 
 ```
 $ gyazo-cli ~/Desktop/image.png

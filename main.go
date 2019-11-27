@@ -44,16 +44,18 @@ func main() {
 
 func realMain() int {
 	app := &cli.App{
-		Name:    "gyazo-cli",
-		Usage:   "Gyazo command-line uploader",
-		Action:  upload,
-		Version: Version,
+		Name:      "gyazo-cli",
+		Usage:     "Gyazo command-line uploader",
+		UsageText: "gyazo-cli [global options] [PATH]",
+		Action:    upload,
+		Version:   Version,
 		Authors: []*cli.Author{
 			&cli.Author{
 				Name:  "Tomohiro Taira",
 				Email: "tomohiro.t@gmail.com",
 			},
 		},
+		Copyright: "© 2019 Tomohiro Taira",
 	}
 	err := app.Run(os.Args)
 	if err != nil {
