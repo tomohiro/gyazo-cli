@@ -6,9 +6,6 @@ install:
   - make deps
 
 script:
-  - go build
-
-deploy:
   - go install
 
 after_success:
