@@ -11,6 +11,7 @@ XC_OS         := "linux darwin windows"
 XC_ARCH       := "386 amd64"
 BUILD_LDFLAGS := "-w -s -X main.revision=$(REVISION)"
 
+# Tasks
 .PHONY: help
 help:
 	@echo "Please type: make [target]"
@@ -43,7 +44,7 @@ updatedeps:
 .PHONY: dist
 dist:
 	@echo "===> Shipping packages as release assets..."
-	goxz -d=$(ASSETS_DIR) -os=$(XC_OS) -arch=$(XC_ARCH) --build-ldflags=$(BUILD_LDFLAGS) -pv=$(VERSION) -z
+	goxz -z -pv=$(VERSION) -d=$(ASSETS_DIR) -os=$(XC_OS) -arch=$(XC_ARCH) --build-ldflags=$(BUILD_LDFLAGS)
 	pushd $(ASSETS_DIR); \
 	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
 	popd
