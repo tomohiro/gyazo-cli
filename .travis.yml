@@ -1,14 +1,17 @@
 language: go
-sudo: false
-
 go:
   - 1.13
 
-before_script:
+install:
   - make deps
 
 script:
+  - go build
+
+deploy:
   - go install
+
+after_success:
   - gyazo-cli -v
 
 notifications:
