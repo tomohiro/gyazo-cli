@@ -44,7 +44,7 @@ dist:
 	goxz -d=$(ASSETS_DIR) -os=$(XC_OS) -arch=$(XC_ARCH) --build-ldflags=$(BUILD_LDFLAGS) -pv=$(VERSION) -z
 	pushd $(ASSETS_DIR); \
 	shasum -a 256 *.zip > ./$(VERSION)_SHA256SUMS; \
-	popd; \
+	popd
 
 release:
 	@echo "===> Publishing to GitHub..."
